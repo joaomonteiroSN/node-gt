@@ -1,5 +1,5 @@
 const { createServer } = require('http')
-const listarProdutos = require('./routes/produtos');
+const Produtos = require('./routes/produtos');
 
 const server = createServer((req, res) => {
 
@@ -15,26 +15,23 @@ const server = createServer((req, res) => {
 
     if(url == '/produtos') {
         res.writeHead(200, {'Content-Type': 'application/json'});
-        return res.end(JSON.stringify(listarProdutos()))
+        return res.end(JSON.stringify(Produtos.listar()))
     }
 
-    if(url == '/adicionar') {
+    if(url == '/produtos/adicionar') {
+        Produtos.adicionar(4, 'garmin', 4000)
         res.writeHead(200, {'Content-Type': 'text/plain'});
-        produtos.push(
-            {
-                'id': 3,
-                'nome': 'mouse pad',
-                'valor': 200.00
-            }
-        )
         return res.end('Produto adicionado')
+    }
+
+    if(url == '/produtos/excluir') {
+        Produtos.remover(1)
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        return res.end('Produto removido com sucesso')
     }
 
     res.writeHead(404, {'Content-Type': 'text/html'});
     return res.end('URL inválida')
-
-
-
 });
 
 server.listen(3000, ()=>{

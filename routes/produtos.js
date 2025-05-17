@@ -1,5 +1,6 @@
-function listarProdutos() {
-    const produtos = [
+class Produtos {
+    
+    static produtos = [
         {
             'id': 1,
             'nome': 'microfone',
@@ -12,19 +13,33 @@ function listarProdutos() {
         }
     ]
 
-    return produtos
-}
+    static listar() { 
+        return Produtos.produtos
+    }
 
-function adicionarProduto() {
+    static adicionar(id, nome, valor) {
+        Produtos.produtos.push(
+            {
+                'id': id,
+                'nome': nome,
+                'valor': valor
+            }
+        )
+    }
 
-}
-
-function removerProduto() {
-
-}
-
-function atualizarProduto() {
+    static remover(i) {
+        Produtos.produtos.splice(i, -1)
+    }
     
+    static atualizar() {
+        
+    }
 }
 
-module.exports = listarProdutos;
+module.exports = Produtos;
+
+//CRUD
+//create
+//read
+//update
+//delete
